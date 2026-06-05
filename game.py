@@ -44,7 +44,7 @@ PATTERN = {
     "straight": (1, 0, 1, 0),
     "corner":   (1, 1, 0, 0),
     "tpose":    (1, 1, 1, 0),
-    "cross":    (1, 1, 1, 1),   # 4-way junction; rotation has no visual effect
+    "cross":    (1, 1, 1, 1),   
     "source":   (0, 1, 0, 0),
     "target":   (0, 0, 0, 1),
 }
@@ -105,15 +105,15 @@ def progate():
                 continue                            # off the board
             ncell = grid[nr][nc]
             if ncell.type is None or ncell.powered:
-                continue                            # empty cell, or already visited
+                continue                            
             if not ncell.connections()[(d + 2) % 4]:
-                continue                            # neighbor closed on the matching side
+                continue                            
             ncell.powered = True
             queue.append((nr, nc))
 
 
 def is_won():
-    """True if power has reached the target."""
+   
     for row in grid:
         for cell in row:
             if cell.type == "target":
@@ -126,8 +126,8 @@ grid[2][1].type = "straight"
 grid[2][2].type = "corner"
 grid[2][3].type = "tpose"
 grid[1][2].type = "straight"
-grid[1][2].locked = True        # demo: this pipe stays put
-grid[3][3].type = "cross"       # demo: 4-way junction
+grid[1][2].locked = True        
+grid[3][3].type = "cross"       
 
 
 running = True
@@ -154,7 +154,7 @@ while running:
 
     progate()
 
-    # win-state edge detection (prints only when state flips)
+    # win-state
     won = is_won()
     if won and not prev_won:
         print("CIRCUIT COMPLETE")
@@ -187,7 +187,7 @@ while running:
 
             arm_color = PIPE_ON if cell.powered else PIPE_OFF
 
-            # arms first
+            
             conns = cell.connections()
             for d in range(4):
                 if conns[d]:
@@ -196,7 +196,7 @@ while running:
                     ey = cy + dy * (CELL // 2)
                     pygame.draw.line(screen, arm_color, (cx, cy), (ex, ey), 10)
 
-            # overlay (drawn ONCE per cell, not per direction)
+            # overlay
             if cell.type == "source":
                 pygame.draw.circle(screen, SOURCE_COLOR, (cx, cy), 22)
             elif cell.type == "target":
@@ -205,7 +205,7 @@ while running:
             else:
                 pygame.draw.circle(screen, arm_color, (cx, cy), 12)   # hub glows with arms
 
-            # locked-cell marker (drawn on top of the hub)
+            # locked-cell marker 
             if cell.locked and cell.type not in ("source", "target"):
                 pygame.draw.circle(screen, (220, 95, 95), (cx, cy), 5)
                
