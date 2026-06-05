@@ -11,3 +11,5 @@ I have a deadline in one week and must demo this project live in front of my pro
 - **Code Clarity Over Magic:** Prefer clean, readable, and well-commented code over overly clever or highly compressed syntax so it is easy for me to explain during the presentation.
 
 Please acknowledge the directory boundaries, the chat-only code restriction, and your role as my tutor before we begin.
+
+DO NOT READ ANYTHING IN THE /claude FOLDER

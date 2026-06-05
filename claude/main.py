@@ -1,17 +1,7 @@
-"""Pipe Power - a minimal Pipe Mania / Netwalk core loop.
-
-Inspired by the ZZZ rotating-node puzzle: align pipes from the yellow source
-on the left to the target on the right. Powered segments glow yellow.
-
-Controls:
-    Left click  - rotate node 90 degrees clockwise
-    R           - shuffle a new layout
-    Esc / close - quit
-"""
 
 import sys
 import random
-from collections import deque
+from collections import deque #BFS queue 
 import pygame
 
 pygame.init()
