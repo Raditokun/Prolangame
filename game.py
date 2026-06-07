@@ -71,8 +71,12 @@ class Cell:
 
 #grid = [[Cell()] * COLS] * ROWS  
 grid = [[Cell() for _ in range(COLS)] for _ in range(ROWS)]
-grid[2][0].type = "source"
-grid[2][COLS - 1].type = "target"
+
+#source target
+grid[0][0].type = "source"
+grid[0][0].rots = 1                
+grid[ROWS - 1][COLS - 1].type = "target"
+grid[ROWS - 1][COLS - 1].rots = 1    # open N 
 
 def progate():
     for row in grid:
@@ -122,12 +126,18 @@ def is_won():
 
 
 #test
-grid[2][1].type = "straight"
-grid[2][2].type = "corner"
-grid[2][3].type = "tpose"
-grid[1][2].type = "straight"
-grid[1][2].locked = True        
-grid[3][3].type = "cross"       
+grid[2][1].type = "corner"      # bend N at column 1
+grid[1][1].type = "corner"      # turn E at row 1
+grid[1][2].type = "straight"    # straight across
+grid[1][3].type = "straight"    # locked pivot
+grid[1][3].rots = 1             # E-W (already in solution rot)
+grid[1][3].locked = True
+grid[1][4].type = "corner"      # bend S at column 4
+grid[2][4].type = "corner"      # turn E at row 2
+
+# distractors (not connected to the solution)
+grid[3][2].type = "tpose"
+grid[4][3].type = "cross"     
 
 
 running = True
